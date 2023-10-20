@@ -51,9 +51,18 @@ class ParkingGarage():
         # add an unpaid ticket to the tickets dict
         self.tickets[self.numServedTickets] = False
 
-    def payForTicket(self, ticketNum):
-        pass
-
+    def payForTicket(self):
+        ticketNum = int(input("What is your ticket number"))
+        paidA = int(input("Thats 5 bucks little man"))
+        if paidA >= ParkingGarage.ticketPrice:
+            self.tickets[ticketNum] = True
+        
+        if paidA > ParkingGarage.ticketPrice:
+           change = paidA - ParkingGarage.ticketPrice
+           print(f'Your change is ${change}')
+            
+        print(self.tickets)
+        
     def leaveGarage(self, ticketNum):
 
         # add ticket num to served tickets list
@@ -70,6 +79,8 @@ myGarage.getTicket()
 myGarage.getTicket()
 myGarage.getTicket()
 myGarage.getTicket()
+myGarage.payForTicket()
+
 
 
 
