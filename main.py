@@ -41,20 +41,26 @@ class ParkingGarage():
     
     def __init__(self):
         self.tickets = {} # a dict of dicts {'paid': True}
-        self.servedTickets = 0
-        self.carsLeft = 0
+        self.numServedTickets = 0
+        self.servedTickets = []
 
     def getTicket(self):
-        self.servedTickets += 1
-        self.tickets[self.servedTickets] = False
-        print(self.tickets)
-        print(self.servedTickets)
+        # update the number of tickets handed out
+        self.numServedTickets += 1
 
-    def payForTicket():
+        # add an unpaid ticket to the tickets dict
+        self.tickets[self.numServedTickets] = False
+
+    def payForTicket(self, ticketNum):
         pass
 
-    def leaveGarage(self):
-        self.carsLeft += 1
+    def leaveGarage(self, ticketNum):
+
+        # add ticket num to served tickets list
+        self.servedTickets.append(ticketNum)
+
+        # remove the passed ticket from the tickets dict
+        del self.tickets[ticketNum]
 
 
 myGarage = ParkingGarage()
