@@ -73,7 +73,9 @@ class ParkingGarage():
                 break
 
     def _getTicketNumber(self):
-        ''' Created private method that gets users ticket number '''
+        """requests user input
+        
+        returns ticketNum"""
        
         while True:
             try: # used exception handling to only accept the correct input
