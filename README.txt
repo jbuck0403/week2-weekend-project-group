@@ -13,6 +13,7 @@ Alex:
     _getTicketNumber
     _checkPaid
     leaveGarage
+    
 
 Lloyd:
     payForTicket
