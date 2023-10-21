@@ -31,6 +31,7 @@ class ParkingGarage():
                     self.tickets[ticketNum] = True
                     break
 
+        # returns True if ticket is paid, otherwise False
         return self._checkPaid(ticketNum)
             
     def leaveGarage(self):
@@ -73,7 +74,7 @@ class ParkingGarage():
                 ticketNum = int(input("What is your ticket number: "))
                 if ticketNum > 0 and ticketNum in self.tickets.keys():
                     return ticketNum
-            except: 
+            except:
                 continue
 
     def _checkPaid(self, ticketNum):
