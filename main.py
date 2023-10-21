@@ -3,7 +3,7 @@ class ParkingGarage():
     ticketPrice = 5
     
     def __init__(self):
-        self.tickets = {} # a dict of dicts {'paid': True}
+        self.tickets = {} # a dict of dicts {#: True}
         self.numServedTickets = 0
         self.servedTickets = []
 
