@@ -15,9 +15,13 @@ class ParkingGarage():
         self.tickets[self.numServedTickets] = False
 
     def payForTicket(self, ticketNum = False):
-        if not ticketNum:
+        
+        """Exceptes the ticket number to return a Bool value  
+        """
+        
+        if not ticketNum: # to check if a ticket number was provided 
             ticketNum = self._getTicketNumber()
-
+            
         if self._checkPaid(ticketNum):
             print("Already paid")
         else:
