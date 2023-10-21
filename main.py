@@ -1,47 +1,3 @@
-# Your parking garage class should have the following methods:
-# - takeTicket
-# - This should decrease the amount of tickets available by 1
-# - This should decrease the amount of parkingSpaces available by 1
-# - payForParking
-# - Display an input that waits for an amount from the user and store it in a variable
-# - If the payment variable is not empty then (meaning the ticket has been paid) -> display a message to the user that their ticket has been paid and they have 15mins to leave
-# - This should update the "currentTicket" dictionary key "paid" to True
-# -leaveGarage
-# - If the ticket has been paid, display a message of "Thank You, have a nice day"
-# - If the ticket has not been paid, display an input prompt for payment
-# - Once paid, display message "Thank you, have a nice day!"
-# - Update parkingSpaces list to increase by 1 (meaning add to the parkingSpaces list)
-# - Update tickets list to increase by 1 (meaning add to the tickets list)
-
-# You will need a few attributes as well:
-# - tickets -> list
-# - parkingSpaces -> list
-# - currentTicket -> dictionary
-
-'''
-pseudo code
-
-parking garage
-
-    comes in and gets a ticket
-        -price
-        number - consecutive tickets numbers
-        -timestamp
-        -date
-        {'paid': True}
-
-    pay for their ticket
-
-    leave the garage
-        ticket
-        make sure its paid
-            if paid
-                leave
-            if not paid
-                make them pay
-                then leave
-'''
-
 class ParkingGarage():
 
     ticketPrice = 5
@@ -58,75 +14,75 @@ class ParkingGarage():
         # add an unpaid ticket to the tickets dict
         self.tickets[self.numServedTickets] = False
 
-    def payForTicket(self):
-        ticketNum = self._getTicketNumber()
+    def payForTicket(self, ticketNum = False):
+        if not ticketNum:
+            ticketNum = self._getTicketNumber()
+
         if self._checkPaid(ticketNum):
-            
-            print("Already paid")  
+            print("Already paid")
         else:
             while True:
-                paidA = int(input(f"Thats {ParkingGarage.ticketPrice} bucks little man"))
+                paidA = int(input(f"Thats {ParkingGarage.ticketPrice} bucks little man: "))
             
-                if paidA >= ParkingGarage.ticketPrice:
-                    self.tickets[ticketNum] = True
                 if paidA > ParkingGarage.ticketPrice:
                     change = paidA - ParkingGarage.ticketPrice
                     print(f'Your change is ${change}')
-            
-        
-        
-      
-        print(self.tickets)
+                if paidA >= ParkingGarage.ticketPrice:
+                    self.tickets[ticketNum] = True
+                    break
 
+        return self._checkPaid(ticketNum)
+            
+    def leaveGarage(self):
+        # ask for ticket
+        ticketNum = self._getTicketNumber()
+        # if ticket paid
+        
+        if paid := self.payForTicket(ticketNum):
+            # add ticket num to served tickets list
+            self.servedTickets.append(ticketNum)
+            # remove the passed ticket from the tickets dict
+            del self.tickets[ticketNum]
+            # say goodbye
+            print("Have a nice day!")
+
+        return paid
+            
+    def garageRunner(self):
+        """Primary function to run code - allows for user input to run methods"""
+        while True:
+            userInput = input("What would you like to do?\n[T]icket/[P]ay Ticket/[L]eave Garage or [Q]uit: ")
+            try:
+                userInput = userInput.lower()[0]
+            except:
+                continue
+
+            if userInput == 't':
+                self.getTicket()
+            elif userInput == 'p':
+                self.payForTicket()
+            elif userInput == 'l':
+                self.leaveGarage()
+            elif userInput == 'q':
+                print("Thanks for parking!")
+                break
 
     def _getTicketNumber(self):
         while True:
-            try: 
-                ticketNum = int(input("What is your ticket number"))
+            try:
+                ticketNum = int(input("What is your ticket number: "))
                 if ticketNum > 0 and ticketNum in self.tickets.keys():
                     return ticketNum
             except: 
                 continue
 
-
     def _checkPaid(self, ticketNum):
         
         return self.tickets[ticketNum]
-    
-
-
-        
-    def leaveGarage(self):
-        
-    # leave the garage
-    #     ticket
-     ticketNum = self._getTicketNumber()
-
-    #     make sure its paid
-
-    #         if paid
-    
-    #             leave
-    #         if not paid
-    #             make them pay
-    #             then leave
-
-        # add ticket num to served tickets list
-
-     self.servedTickets.append(ticketNum)
-
-        # remove the passed ticket from the tickets dict
-     del self.tickets[ticketNum]
-
 
 myGarage = ParkingGarage()
-myGarage.getTicket()
-myGarage.getTicket()
-myGarage.getTicket()
-myGarage.getTicket()
-myGarage.getTicket()
-myGarage.getTicket()
-myGarage.payForTicket()
+myGarage.garageRunner()
+
 
 
 
