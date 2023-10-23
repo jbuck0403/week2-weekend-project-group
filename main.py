@@ -33,6 +33,9 @@ class ParkingGarage():
         if not ticketNum: # to check if a ticket number was provided 
             ticketNum = self._getTicketNumber()
             
+        if ticketNum == False:
+            return False
+
         if self._checkPaid(ticketNum):
             print("Already paid\n")
         else:
@@ -52,6 +55,10 @@ class ParkingGarage():
     def leaveGarage(self):
         # ask for ticket
         ticketNum = self._getTicketNumber()
+
+        if ticketNum == False:
+            return
+
         # if ticket paid
         
         if paid := self.payForTicket(ticketNum):
@@ -97,6 +104,9 @@ class ParkingGarage():
                 ticketNum = int(input("\nWhat is your ticket number: "))
                 if ticketNum > 0 and ticketNum in self.tickets.keys():
                     return ticketNum
+                if not ticketNum in self.tickets.keys():
+                    print("Ticket not available...")
+                    return False
             except:
                 continue
 
