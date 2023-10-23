@@ -3,7 +3,7 @@ class ParkingGarage():
     ticketPrice = 5
     
     def __init__(self):
-        self.tickets = {} # a dict of dicts {#: True}
+        self.tickets = {} # a dict of dicts {#: bool}
         self.numServedTickets = 0
         self.servedTickets = []
 
@@ -14,23 +14,25 @@ class ParkingGarage():
         # add an unpaid ticket to the tickets dict
         self.tickets[self.numServedTickets] = False
 
+        print(f"Ticket #{self.numServedTickets}\n")
+
     def payForTicket(self, ticketNum = False):
         
-        """Exceptes the ticket number to return a Bool value  
+        """Excepts the ticket number to return a Bool value  
         """
         
         if not ticketNum: # to check if a ticket number was provided 
             ticketNum = self._getTicketNumber()
             
         if self._checkPaid(ticketNum):
-            print("Already paid")
+            print("Already paid\n")
         else:
             while True:
-                paidA = int(input(f"Thats {ParkingGarage.ticketPrice} bucks little man: "))
+                paidA = int(input(f"\nThats {ParkingGarage.ticketPrice} bucks little man: "))
             
                 if paidA > ParkingGarage.ticketPrice:
                     change = paidA - ParkingGarage.ticketPrice
-                    print(f'Your change is ${change}')
+                    print(f'Your change is ${change}\n')
                 if paidA >= ParkingGarage.ticketPrice:
                     self.tickets[ticketNum] = True
                     break
@@ -49,7 +51,7 @@ class ParkingGarage():
             # remove the passed ticket from the tickets dict
             del self.tickets[ticketNum]
             # say goodbye
-            print("Have a nice day!")
+            print("Have a nice day!\n")
 
         return paid
             
@@ -79,7 +81,7 @@ class ParkingGarage():
        
         while True:
             try: # used exception handling to only accept the correct input
-                ticketNum = int(input("What is your ticket number: "))
+                ticketNum = int(input("\nWhat is your ticket number: "))
                 if ticketNum > 0 and ticketNum in self.tickets.keys():
                     return ticketNum
             except:
