@@ -2,19 +2,28 @@ class ParkingGarage():
 
     ticketPrice = 5
     
-    def __init__(self):
+    def __init__(self, totalSpaces = 50):
         self.tickets = {} # a dict of dicts {#: bool}
         self.numServedTickets = 0
         self.servedTickets = []
+        self.totalSpaces = totalSpaces
+        self.occupiedSpaces = 0
 
     def getTicket(self):
-        # update the number of tickets handed out
-        self.numServedTickets += 1
+        # if there are still spaces left in the garage
+        if self.occupiedSpaces < self.totalSpaces:
+            # update the number of tickets handed out
+            self.numServedTickets += 1
 
-        # add an unpaid ticket to the tickets dict
-        self.tickets[self.numServedTickets] = False
+            # add an unpaid ticket to the tickets dict
+            self.tickets[self.numServedTickets] = False
 
-        print(f"Ticket #{self.numServedTickets}\n")
+            # increase number of occupied spaces
+            self.occupiedSpaces += 1
+
+            print(f"Ticket #{self.numServedTickets}\n")
+        else:
+            print("Sorry, the garage is full!")
 
     def payForTicket(self, ticketNum = False):
         
@@ -50,6 +59,10 @@ class ParkingGarage():
             self.servedTickets.append(ticketNum)
             # remove the passed ticket from the tickets dict
             del self.tickets[ticketNum]
+
+            # decrease number of occupied spaces
+            self.occupiedSpaces -= 1
+
             # say goodbye
             print("Have a nice day!\n")
 
@@ -89,7 +102,6 @@ class ParkingGarage():
 
     def _checkPaid(self, ticketNum):
         #used to check if paid for ticket
-        
         return self.tickets[ticketNum]
 
 myGarage = ParkingGarage()
