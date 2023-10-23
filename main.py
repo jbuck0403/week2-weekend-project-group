@@ -105,7 +105,7 @@ class ParkingGarage():
                 if ticketNum > 0 and ticketNum in self.tickets.keys():
                     return ticketNum
                 if not ticketNum in self.tickets.keys():
-                    print("Ticket not available...")
+                    print("Ticket not available...\n")
                     return False
             except:
                 continue
